@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import React,{useState} from "react";
 import './App.css';
+import Example from './components/Example';
+import List from './components/List';
+
+const tasks = ["buy bread", "call mom", "do homework", "walk"];
 
 function App() {
+  
+  const [currentTasks, setCurrentTasks] = useState(tasks);
+
+  const newTaskHandler = (task) => {
+    setCurrentTasks( (prevData) => {
+      return [...prevData, task];
+    } );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Example newTaskHandler={newTaskHandler}/>
+      <List list={currentTasks}/>
     </div>
   );
 }
